@@ -1,7 +1,7 @@
 cobol-travis
 ============
 
-[![Build Status](https://travis-ci.org/mmitch/cobol-travis.svg?branch=master)](https://travis-ci.org/mmitch/cobol-travis)
+[![Build Status](https://travis-ci.org/FrankR85/cobol-travis.svg?branch=master)](https://travis-ci.org/FrankR85/cobol-travis)
 
 This repository contains a template for a COBOL development
 environment with the following features:
