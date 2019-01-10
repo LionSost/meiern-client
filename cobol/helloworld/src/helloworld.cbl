@@ -16,8 +16,6 @@
 
        U01-CALCULATION SECTION.
            ADD SUMMAND-1 TO SUMMAND-2 GIVING RESULT
-
-           ADD 1 TO RESULT
            .
 
        U02-SHOW-RESULT SECTION.
