@@ -1,16 +1,12 @@
-COBOL ToDo Liste
+COBOL Maexchen Client
 ============
 
-[![Build Status](https://travis-ci.org/FrankR85/cobol-travis.svg?branch=master)](https://travis-ci.org/FrankR85/cobol-travis)
+[![Build Status](https://travis-ci.org/FrankR85/maexchen-client.svg?branch=master)](https://travis-ci.org/FrankR85/maexchen-client)
 
-Hier entsteht eine einfache Dummy-Implementierung einer ToDo-Liste in COBOL.
+A dummy implementation of a Maexchen Client in COBOL.
 
-Features
+Content
 ----------
-- Continous Integration durch Travis
-- ein einfaches Webfrontend zur Verwaltung der Todo-Liste
-- eine Basis-Implementierung des COBOL-Backends mit folgenden Funktionen:
-  - Anzeigen aller Einträge
-  - Hinzufügen eines Eintrages
-  - Löschen eines Eintrages
-  - Löschen der ganzen Liste
+- **CLIENT.cbl** A helper module to communicate with the Maexchen server
+- **DUMMBOT.cbl** A stupid bot that always rolls and always announces the rolled dice.
+- **SIMPLBOT.cbl** A more elaborate version of the DUMMBOT.cbl. Has unit-tests.
