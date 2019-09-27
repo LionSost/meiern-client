@@ -22,7 +22,7 @@ Content
 - **DUMMBOT.cbl** A stupid bot that always rolls and always announces the rolled dice.
   Compile with:
   ```bash
-  cobc -m DUMMBOT.CBL
+  cobc -m -I copy DUMMBOT.CBL
   ```
 - **SIMPLBOT.cbl** A more elaborate version of the DUMMBOT.cbl.
   
