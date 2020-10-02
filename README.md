@@ -17,7 +17,7 @@ Content
   ```
   e.g.
   ```bash
-  ./CLIENT localhost 9000 frank DUMMBOT
+  ./CLIENT 192.168.42.220 9000 frank DUMMBOT
   ```
 - **DUMMBOT.cbl** A stupid bot that always rolls and always announces the rolled dice.
   Compile with:
