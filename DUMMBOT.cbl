@@ -25,34 +25,23 @@
         COPY DATA.
 
        PROCEDURE DIVISION USING BOT-PARAMETERS.
+           DISPLAY "SERVER-MESSAGE: " SERVER-MESSAGE
            PERFORM PARSE-SERVER-MESSAGE
            INITIALIZE MESSAGE-TO-SERVER
            EVALUATE TRUE
            WHEN ROUND-STARTING
               PERFORM HANDLE-ROUND-STARTING
-           WHEN ANNOUNCED
-              PERFORM HANDLE-ANNOUNCED
            WHEN YOUR-TURN
               PERFORM HANDLE-YOUR-TURN
-           WHEN ROLLED
-              PERFORM HANDLE-ROLLED
            WHEN OTHER
                CONTINUE
       *        DISPLAY "Unknown command: " SERVER-MESSAGE
            END-EVALUATE
+           DISPLAY "MESSAGE-TO-SERVER: " MESSAGE-TO-SERVER
            GOBACK
           .
        HANDLE-YOUR-TURN SECTION.
-          STRING "ROLL;" DELIMITED BY SIZE
-                  TOKEN  DELIMITED BY SIZE
-           INTO  MESSAGE-TO-SERVER
-          EXIT.
-
-       HANDLE-ROLLED SECTION.
-          PERFORM PARSE-SERVER-MESSAGE-ROLLED
-          STRING "ANNOUNCE;" DELIMITED BY SIZE
-                 ROLLED-DICE       DELIMITED BY SIZE
-                 ";"         DELIMITED BY SIZE
+          STRING "SEE;" DELIMITED BY SIZE
                   TOKEN  DELIMITED BY SIZE
            INTO  MESSAGE-TO-SERVER
           EXIT.
@@ -63,25 +52,10 @@
            INTO  MESSAGE-TO-SERVER
           EXIT.
 
-       HANDLE-ANNOUNCED SECTION.
-          UNSTRING SERVER-MESSAGE DELIMITED BY ';'
-              INTO COMMAND
-                   LAST-PLAYER
-                   ANNOUNCED-DICE
-          EXIT.
-
        PARSE-SERVER-MESSAGE SECTION.
            UNSTRING SERVER-MESSAGE
             DELIMITED BY ';'
             INTO COMMAND
-                 TOKEN
-           EXIT.
-
-       PARSE-SERVER-MESSAGE-ROLLED SECTION.
-           UNSTRING SERVER-MESSAGE
-            DELIMITED BY ';'
-            INTO COMMAND
-                 ROLLED-DICE
                  TOKEN
            EXIT.
 

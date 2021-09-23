@@ -1,0 +1,64 @@
+@startuml
+
+participant Server
+participant Client
+
+note right of Server
+Server at client variable: SERVER-MESSAGE
+Client at server variable: MESSAGE-TO-SERVER
+end note
+
+Server -> Client: Registrierung REGISTERED 
+Client -> Server:
+
+loop 
+Server -> Client: ROUND STARTING;{token}                             
+Client -> Server: JOIN;{token}  
+
+  Server -> Client: ROUND STARTED;{round number};{comma seperated list of names}
+  Client -> Server:   
+  alt canceled 
+    Server -> Client: ROUND CANCELED;{reason}   
+    Client -> Server: 
+  else 
+    loop 0 to n times
+      Server -> Client: PLAYER ROLLS;{name}                                                              
+      Client -> Server:
+    
+      Server -> Client: ANNOUNCED;{name};{dice1,dice2}
+      Client -> Server:
+    end
+    
+    
+    Server -> Client: YOUR TURN;{token}                                  
+    alt ROLL
+        Client -> Server: ROLL;{token} 
+        
+        Server -> Client: PLAYER ROLLS;{name}                                                             
+        Client -> Server: 
+        
+        Server -> Client: ROLLED;{dice1,dice2};{token}                                
+        Client -> Server: ANNOUNCE;{dice1,dice2};{token}
+        
+        Server -> Client: ANNOUNCED;{name};{dice1,dice2}                                                 
+        Client -> Server: 
+    else SEE
+            
+            Client -> Server:SEE;{token}
+            
+            Server -> Client: PLAYER WANTS TO SEE;{name}
+            Client -> Server: 
+            
+            Server -> Client: ACTUAL DICE;{dice1,dice2}
+            Client -> Server: 
+            
+            Server -> Client: PLAYER LOST;{name};{reason}
+            Client -> Server:    
+    end
+  end
+  Server -> Client: SCORE;{comma seperated list of names:points}
+  Client -> Server: 
+  
+  
+end
+@enduml
