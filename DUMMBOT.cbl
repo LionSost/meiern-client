@@ -74,10 +74,6 @@
                     TOKEN DELIMITED BY SIZE
               INTO MESSAGE-TO-SERVER        
            END-IF
-                  *> Überprüfen ob eigener Dice größer als der angesagte
-                    *> wenn kleiner Überlegen ob gelogen werden soll
-                    *> wenn kleiner Überlegen ob das angesagte gelogen
-                  *> 
           EXIT.  
 
 
@@ -113,7 +109,7 @@
               MOVE ROLLED-DICE TO ANNOUNCE-DICE
            ELSE
 
-           PERFORM VARYING VAR FROM 1 BY 1 UNTIL VAR > 21 
+           PERFORM VARYING VAR FROM 1 BY 1 UNTIL VAR > 21
               IF DICE-1 IN ANNOUNCED-DICE = DICE-1 IN RANGFOLGE(VAR)
                  AND DICE-2 IN ANNOUNCED-DICE = DICE-2 IN RANGFOLGE(VAR)
                  THEN
@@ -124,7 +120,8 @@
               THEN 
                  COMPUTE ROLLED-RANGFOLGE = VAR
               END-IF
-           END-PERFORM           
+           END-PERFORM  
+
            IF ANNOUNCED-RANGFOLGE < ROLLED-RANGFOLGE
            THEN
               MOVE ROLLED-DICE TO ANNOUNCE-DICE
@@ -148,13 +145,13 @@
 
            COMPUTE RANDOM-ZAHL = ANNOUNCED-RANGFOLGE + 1 +
               FUNCTION MOD(RANDOM-TIME, 20 - ANNOUNCED-RANGFOLGE)
-           DISPLAY RANDOM-ZAHL
        EXIT.
 
        HANDLE-ANNOUNCED SECTION.
            UNSTRING SERVER-MESSAGE
               DELIMITED BY ";"
-              INTO LAST-PLAYER
+              INTO COMMAND
+                   LAST-PLAYER
                    ANNOUNCED-DICE
        EXIT.
 
