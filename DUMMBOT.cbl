@@ -57,7 +57,7 @@
                CONTINUE
       *        DISPLAY "Unknown command: " SERVER-MESSAGE
            END-EVALUATE
-          *> DISPLAY "MESSAGE-TO-SERVER: " MESSAGE-TO-SERVER
+           DISPLAY "MESSAGE-TO-SERVER: " MESSAGE-TO-SERVER
            GOBACK
           .
 
@@ -88,7 +88,7 @@
                   TOKEN  DELIMITED BY SIZE
            INTO  MESSAGE-TO-SERVER
 
-           MOVE "0,0" TO ANNOUNCED-DICE
+           MOVE "7,7" TO ANNOUNCED-DICE
           EXIT.
 
        PARSE-SERVER-MESSAGE SECTION.
@@ -108,7 +108,7 @@
            EXIT.
 
        HANDLE-ANNOUNCE SECTION.
-           IF DICE-1 IN ANNOUNCED-DICE = 0
+           IF DICE-1 IN ANNOUNCED-DICE = 7
            THEN 
               MOVE ROLLED-DICE TO ANNOUNCE-DICE
            ELSE
@@ -134,9 +134,10 @@
            END-IF
            END-IF   
 
-           DISPLAY ANNOUNCE-DICE" "ROLLED-DICE
+           *>DISPLAY ANNOUNCE-DICE" "ROLLED-DICE
            STRING "ANNOUNCE;" DELIMITED BY SIZE
-              ANNOUNCE-DICE DELIMITED BY SIZE
+              ANNOUNCE-DICE DELIMITED BY SIZE 
+              ";" DELIMITED BY SIZE
               TOKEN DELIMITED BY SIZE
            INTO MESSAGE-TO-SERVER
            EXIT.
@@ -147,6 +148,7 @@
 
            COMPUTE RANDOM-ZAHL = ANNOUNCED-RANGFOLGE + 1 +
               FUNCTION MOD(RANDOM-TIME, 20 - ANNOUNCED-RANGFOLGE)
+           DISPLAY RANDOM-ZAHL
        EXIT.
 
        HANDLE-ANNOUNCED SECTION.
