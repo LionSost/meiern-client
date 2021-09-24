@@ -16,6 +16,7 @@
              88 ROLLED VALUE "ROLLED".
              88 ANNOUNCED VALUE "ANNOUNCED".
              88 ANNOUNCE VALUE "ANNOUNCE".
+             88 ROUND-STARTED VALUE "ROUND STARTED".
           05 TOKEN   PIC X(36).
           05 ROLLED-DICE.
             07 DICE-1 PIC 9.
@@ -61,11 +62,16 @@
            GOBACK
           .
 
-
-
        HANDLE-YOUR-TURN SECTION.
-           IF DICE-1 IN ANNOUNCED-DICE <> 6 
-              AND DICE-2 IN ANNOUNCED-DICE <> 6 THEN
+           PERFORM VARYING VAR FROM 1 BY 1 UNTIL VAR > 21
+              IF DICE-1 IN ANNOUNCED-DICE = DICE-1 IN RANGFOLGE(VAR)
+                 AND DICE-2 IN ANNOUNCED-DICE = DICE-2 IN RANGFOLGE(VAR)
+                 THEN
+                 COMPUTE ANNOUNCED-RANGFOLGE = VAR
+               END-IF
+           END-PERFORM  
+           IF ANNOUNCED-RANGFOLGE <= 18 OR DICE-1 
+           IN ANNOUNCED-DICE = 7 THEN
               STRING "ROLL;" DELIMITED BY SIZE
                     TOKEN  DELIMITED BY SIZE
               INTO MESSAGE-TO-SERVER
